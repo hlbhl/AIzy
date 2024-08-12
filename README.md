@@ -75,4 +75,4 @@ API的稳定性和准确性测试。
 5.3 用户测试
 邀请目标用户进行Beta测试，收集用户反馈进行调整。
 
-https://github.com/hlbhl/AIzy/blob/main/%E6%9E%B6%E6%9E%84%E5%9B%BE.png
+![image](https://github.com/hlbhl/AIzy/blob/main/%E6%9E%B6%E6%9E%84%E5%9B%BE.png)

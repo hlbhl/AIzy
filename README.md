@@ -35,4 +35,4 @@ Prompt 设计：根据功能需求设计合适的 Prompt，确保模型能够生
 互动式反馈：增强与用户的互动，提供更多个性化和实时的支持。
 多语言支持：扩展至其他语言，服务更多国际学生。
 
-![image]([https://github.com/hlbhl/AIzy/blob/main/%E6%9E%B6%E6%9E%84%E5%9B%BE.png](https://github.com/hlbhl/AIzy/blob/main/%E6%9E%B6%E6%9E%84%E5%9B%BE1.png))
+![image](https://github.com/hlbhl/AIzy/blob/main/%E6%9E%B6%E6%9E%84%E5%9B%BE1.png)

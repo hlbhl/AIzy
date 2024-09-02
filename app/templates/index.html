@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>胡萝卜</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>胡萝卜校园小工具</h1>
+        </header>
+
+        <div class="main-content">
+            <div class="left-panel">
+                <h1>工具使用区</h1>
+
+
+                <div class="mode-toggle">
+                    <button id="chatMode" class="active-mode">文章摘要模式</button>
+                    <button id="therapyMode">心理咨询模式</button>
+                </div>
+
+                <form id="inputForm">
+                    <textarea id="userInput" name="user_input" placeholder="在这里输入..." required></textarea>
+                    <button type="submit">发送</button>
+                </form>
+            </div>
+
+            <div class="right-panel" id="responseContainer">
+                <!-- 历史记录将显示在这里 -->
+            </div>
+        </div>
+
+        <footer>
+            <p>版权所有 &copy; 胡萝卜</p>
+        </footer>
+    </div>
+
+    <script>
+        let currentMode = 'chat'; // 默认模式
+
+        document.getElementById('chatMode').addEventListener('click', function() {
+            currentMode = 'chat';
+            updateMode();
+        });
+
+        document.getElementById('therapyMode').addEventListener('click', function() {
+            currentMode = 'therapy';
+            updateMode();
+        });
+
+        function updateMode() {
+            document.getElementById('chatMode').classList.toggle('active-mode', currentMode === 'chat');
+            document.getElementById('therapyMode').classList.toggle('active-mode', currentMode === 'therapy');
+        }
+
+        document.getElementById('inputForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let userInput = document.getElementById('userInput').value;
+
+            if (userInput.trim() === "") {
+                alert("请输入您的问题！");
+                return;
+            }
+
+            let url = currentMode === 'chat' ? '/chat_process' : '/therapy_process';
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `user_input=${encodeURIComponent(userInput)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                let responseContainer = document.getElementById('responseContainer');
+                if (data.output) {
+                    let responseItem = document.createElement('div');
+                    responseItem.className = 'response-item';
+                    responseItem.innerHTML = `<p><strong>用户:</strong> ${userInput}</p><p><strong>回复:</strong> ${data.output}</p>`;
+                    responseContainer.prepend(responseItem);
+                    document.getElementById('userInput').value = ''; // 清空输入框
+                } else if (data.error) {
+                    let errorItem = document.createElement('div');
+                    errorItem.className = 'response-item';
+                    errorItem.innerHTML = `<p>错误: ${data.error}</p>`;
+                    responseContainer.prepend(errorItem);
+                }
+            })
+            .catch(error => {
+                let responseContainer = document.getElementById('responseContainer');
+                let errorItem = document.createElement('div');
+                errorItem.className = 'response-item';
+                errorItem.innerHTML = `<p>网络错误，请稍后重试。</p>`;
+                responseContainer.prepend(errorItem);
+                console.error('Fetch error:', error);
+            });
+        });
+    </script>
+</body>
+</html>

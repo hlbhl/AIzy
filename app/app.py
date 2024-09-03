@@ -39,8 +39,8 @@ prompt_1 = '''
 def chat_process():
     user_input = request.form['user_input']
     client = OpenAI(
-        base_url="https://api.xiaoai.plus/v1",
-        api_key='sk-v18yU6VXxR76nNYV950e7a83Fb7a4d1b9c1341E41c3aB254'
+        base_url="https://api.xxx",
+        api_key='sk-xxx'
     )
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
@@ -105,8 +105,8 @@ prompt_2 = f"""
 def therapy_process():
     user_input = request.form['user_input']
     client = OpenAI(
-        base_url="https://api.xiaoai.plus/v1",
-        api_key='sk-v18yU6VXxR76nNYV950e7a83Fb7a4d1b9c1341E41c3aB254'
+        base_url="https://api.xxx",
+        api_key='sk-xxx'
     )
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
